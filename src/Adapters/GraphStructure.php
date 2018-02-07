@@ -7,6 +7,8 @@ use UnderStated\Contracts\MachineDriven;
 use UnderStated\Contracts\StructureInterface;
 use UnderStated\Machine;
 use UnderStated\States\State;
+use UnderStated\Transitions\Transition;
+use UnderStated\Exceptions\TransitionException;
 
 /**
  * Class GraphStructure
@@ -15,6 +17,7 @@ use UnderStated\States\State;
 class GraphStructure implements StructureInterface, MachineDriven
 {
     const VERTEX_ATTRIBUTE = 'state';
+    const EDGE_ATTRIBUTE = 'transition';
 
     /**
      * @var Machine
@@ -30,6 +33,11 @@ class GraphStructure implements StructureInterface, MachineDriven
      * @var null|int
      */
     protected $initial;
+
+    /**
+     * @var array
+     */
+    protected $transitions = [];
 
     /**
      * @param Graph $graph
@@ -68,6 +76,19 @@ class GraphStructure implements StructureInterface, MachineDriven
         return $this->getVertex($id)->getAttribute('state');
     }
 
+
+    /**
+     * @param string $id
+     * @return Transition
+     */
+    public function getTransition($id)
+    {
+        if (!isset($this->transition[$id])) {
+            throw new TransitionException("Transition $id not found");
+        }
+        return $this->transition[$id];
+    }
+
     /**
      * @param $id
      * @return \Fhaculty\Graph\Vertex
@@ -100,21 +121,25 @@ class GraphStructure implements StructureInterface, MachineDriven
     }
 
     /**
-     * @param string $from
-     * @param string $to
-     * @param bool $undirected
+     * @param Transition $transition
      * @return mixed
      */
-    public function addTransition($from, $to, $undirected = false)
+    public function addTransition($transition)
     {
-        $from = $this->getVertex($from);
-        $to = $this->getVertex($to);
-
-        if ($undirected) {
-            return $from->createEdge($to);
+        $from = $this->getVertex($transition->getFrom());
+        $to = $this->getVertex($transition->getTo());
+        
+        if ($transition->isUndirected()) {
+            $edge = $from->createEdge($to);
+        } else {
+            $edge = $from->createEdgeTo($to);
         }
 
-        return $from->createEdgeTo($to);
+        $this->transitions[$transition->getId()] = $transition->getId();
+
+        $edge->setAttribute(SELF::EDGE_ATTRIBUTE, $transition);
+
+        return edge;
     }
 
     /**

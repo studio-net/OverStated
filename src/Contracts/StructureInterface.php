@@ -1,6 +1,7 @@
 <?php namespace UnderStated\Contracts;
 
 use UnderStated\States\State;
+use UnderStated\Transitions\Transition;
 
 /**
  * Interface StructureInterface
@@ -45,10 +46,9 @@ interface StructureInterface
     public function getTransitionsFrom($state);
 
     /**
-     * @param string $from
-     * @param string $to
-     * @param bool $undirected
+     * @param Transition $transition
      * @return mixed
      */
-    public function addTransition($from, $to, $undirected = false);
+    public function transition($transition);
+
 }

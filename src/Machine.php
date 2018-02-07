@@ -72,14 +72,17 @@ class Machine
 
     /**
      * Transition from the current state to another via a valid
-     * edge on the graph.
+     * transition.
      *
-     * @param string $state
+     * @param string $transition
      * @return bool
      * @throws UninitialisedException
      */
-    public function transition($state)
+    public function transition($transition)
     {
+        $transition = $this->structure->getTransition($transition);
+        $state = $transition->getTo();
+
         if (! $this->state) {
             throw new UninitialisedException('FSM is not initialised.');
         }

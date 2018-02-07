@@ -7,6 +7,8 @@ use UnderStated\Adapters\GraphStructure;
 use UnderStated\Contracts\MachineBuilder;
 use UnderStated\Machine;
 use UnderStated\States\StateFactory;
+use UnderStated\Transitions\TransitionFactory;
+use UnderStated\Transitions\Transition;
 
 /**
  * Class GraphBuilder
@@ -36,6 +38,7 @@ class GraphBuilder implements MachineBuilder
     {
         $this->graph = new GraphStructure(new Graph);
         $this->stateFactory = new StateFactory();
+        $this->transitionFactory = new TransitionFactory();
     }
 
     /**
@@ -88,18 +91,18 @@ class GraphBuilder implements MachineBuilder
         return $this;
     }
 
+
     /**
      * Add a new transition
      *
-     * @param $fromId
-     * @param $toId
-     * @param int $undirected
+     * @param Transition $transition
      * @return $this
      */
-    public function transition($fromId, $toId, $undirected = 0)
+    public function transition($transition)
     {
-        $this->graph->addTransition($fromId, $toId, $undirected);
+        $transitionstate = $this->transitionFactory->create($transition);
 
+        $this->graph->addTransition($transition);
         return $this;
     }
 
