@@ -17,27 +17,27 @@ class Transition implements MachineDriven
     /**
      * @var string
      */
-    protected $id;
+    public $id;
 
     /**
      * @var string
      */
-    protected $nicename;
+    public $nicename;
 
     /**
      * @var string
      */
-    protected $description;
+    public $description;
 
     /**
      * @var string
      */
-    protected $from;
+    public $from;
 
     /**
      * @var string
      */
-    protected $to;
+    public $to;
 
     /**
      * @var bool
