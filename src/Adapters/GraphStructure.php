@@ -115,9 +115,13 @@ class GraphStructure implements StructureInterface, MachineDriven
      */
     public function getTransitionsFrom($state)
     {
-        return $this->getVertex($state)
-            ->getVerticesEdgeTo()
-            ->getIds();
+        $transitions = [];
+        $edges = $this->getVertex($state)
+            ->getEdgesOut();
+        foreach ($edges as $edge) {
+            $transitions[] = $edge->getAttribute(SELF::EDGE_ATTRIBUTE);
+        }
+        return $transitions;
     }
 
     /**
