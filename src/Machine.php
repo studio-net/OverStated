@@ -114,7 +114,18 @@ class Machine
                     ));
                 }
             }
+        } else {
+            throw new Exceptions\TransitionException(
+                sprintf(
+                    "Transition '%s' to status '%s' is impossible from status '%s'",
+                    $transition->getId(),
+                    $state,
+                    $this->getState()->getId()
+                )
+            );
+            
         }
+
 
         return false;
     }

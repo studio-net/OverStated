@@ -100,7 +100,7 @@ class GraphBuilder implements MachineBuilder
      */
     public function transition($transition)
     {
-        $transitionstate = $this->transitionFactory->create($transition);
+        $transition = $this->transitionFactory->create($transition);
 
         $this->graph->addTransition($transition);
         return $this;

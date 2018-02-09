@@ -8,10 +8,10 @@ use UnderStated\Contracts\MachineDriven;
 use UnderStated\Machine;
 
 /**
- * Class State
- * @package UnderStated\States
+ * Class Transition
+ * @package UnderStated\Transitions
  */
-class State implements MachineDriven
+class Transition implements MachineDriven
 {
 
     /**

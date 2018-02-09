@@ -45,10 +45,4 @@ interface StructureInterface
      */
     public function getTransitionsFrom($state);
 
-    /**
-     * @param Transition $transition
-     * @return mixed
-     */
-    public function transition($transition);
-
 }

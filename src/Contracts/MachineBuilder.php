@@ -38,12 +38,11 @@ interface MachineBuilder
     /**
      * Add a new transition
      *
-     * @param $fromId
-     * @param $toId
-     * @param int $undirected
+     * @param Transition $transition
      * @return $this
      */
-    public function transition($fromId, $toId, $undirected = 0);
+    public function transition($transition);
+
 
     /**
      * Add a list of transitions

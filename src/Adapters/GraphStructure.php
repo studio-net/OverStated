@@ -83,10 +83,10 @@ class GraphStructure implements StructureInterface, MachineDriven
      */
     public function getTransition($id)
     {
-        if (!isset($this->transition[$id])) {
+        if (!isset($this->transitions[$id])) {
             throw new TransitionException("Transition $id not found");
         }
-        return $this->transition[$id];
+        return $this->transitions[$id];
     }
 
     /**
@@ -135,11 +135,11 @@ class GraphStructure implements StructureInterface, MachineDriven
             $edge = $from->createEdgeTo($to);
         }
 
-        $this->transitions[$transition->getId()] = $transition->getId();
+        $this->transitions[$transition->getId()] = $transition;
 
         $edge->setAttribute(SELF::EDGE_ATTRIBUTE, $transition);
 
-        return edge;
+        return $edge;
     }
 
     /**
