@@ -130,22 +130,24 @@ class GraphStructure implements StructureInterface, MachineDriven
      * @param Transition $transition
      * @return mixed
      */
-    public function addTransition($transition)
+    public function addTransition($transition) : \Fhaculty\Graph\Set\Edges
     {
-        $from = $this->getVertex($transition->getFrom());
         $to = $this->getVertex($transition->getTo());
         
-        if ($transition->isUndirected()) {
-            $edge = $from->createEdge($to);
-        } else {
-            $edge = $from->createEdgeTo($to);
-        }
-
         $this->transitions[$transition->getId()] = $transition;
 
-        $edge->setAttribute(SELF::EDGE_ATTRIBUTE, $transition);
+        foreach ($transition->getFrom() as $origin) {
+            $from = $this->getVertex($origin);
 
-        return $edge;
+            if ($transition->isUndirected()) {
+                $edge = $from->createEdge($to);
+            } else {
+                $edge = $from->createEdgeTo($to);
+            }
+
+            $edge->setAttribute(SELF::EDGE_ATTRIBUTE, $transition);
+        }
+        return $this->getVertex($transition->getTo())->getEdgesIn();
     }
 
     /**

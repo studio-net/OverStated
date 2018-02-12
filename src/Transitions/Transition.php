@@ -22,7 +22,7 @@ class Transition implements MachineDriven
     /**
      * @var string
      */
-    public $nicename;
+    public $name;
 
     /**
      * @var string
@@ -30,7 +30,7 @@ class Transition implements MachineDriven
     public $description;
 
     /**
-     * @var string
+     * @var []string
      */
     public $from;
 
@@ -78,19 +78,19 @@ class Transition implements MachineDriven
     }
 
     /**
-     * Get the state ID
+     * Get the transition ID
      *
      * @return string
      */
     public function getId()
     {
-        if (isset($this->state)) {
-            return $this->state;
+        if (isset($this->id)) {
+            return $this->id;
         }
 
         $className = str_replace('\\', '', snake_case(class_basename($this)));
 
-        return $this->state = str_replace('_state', '', $className);
+        return $this->id = str_replace('_state', '', $className);
     }
 
     /**
@@ -124,13 +124,13 @@ class Transition implements MachineDriven
     }
 
     /**
-     * Get transition origin.
+     * Get transition origins.
      * 
-     * @return string
+     * @return []string
      */
     public function getFrom()
     {
-        return $this->from;
+        return (array) $this->from;
     }
 
     /**
