@@ -67,7 +67,6 @@ class Machine
 
         $this->forget('initialise');
 
-        $this->handle('onEnter');
     }
 
     /**
@@ -81,53 +80,36 @@ class Machine
     public function transition($transition)
     {
         $transition = $this->structure->getTransition($transition);
-        $state = $transition->getTo();
+        $destState = $transition->getTo();
 
         if (! $this->state) {
             throw new UninitialisedException('FSM is not initialised.');
         }
 
-        if ($this->structure->canTransitionFrom($id = $this->getState()->getId(), $state)) {
-            if ($this->execHandle('onExit', [$next = $this->structure->getState($state)])) {
-                array_push($this->history, $id);
+        $currentState = $this->getState()->getId();
 
-                $this->setState($next);
-
-                if ($this->execHandle('onEnter', [$from = $this->structure->getState($id)])) {
-                    // Remove all the bound events from the previous state
-                    $boundEvents = $from->getBoundEvents();
-
-                    if ($boundEvents) {
-                        $this->forget($boundEvents);
-                    }
-
-                    // Emit a transition event
-                    $this->fire('transition', [
-                        $from,
-                        $this->state
-                    ]);
-
-                    return true;
-                } else {
-                    $this->setState($this->structure->getState(
-                        array_splice($this->history, -1, 1)[0]
-                    ));
-                }
-            }
-        } else {
+        if (!$this->structure->canTransitionFrom($currentState, $destState)) {
             throw new Exceptions\TransitionException(
                 sprintf(
                     "Transition '%s' to status '%s' is impossible from status '%s'",
                     $transition->getId(),
-                    $state,
+                    $destState,
                     $this->getState()->getId()
                 )
             );
-            
         }
 
+        $transition->onTransit();
 
-        return false;
+        array_push($this->history, $currentState);
+        $this->setState($destState);
+
+        // Emit a transition event
+        $this->fire("transition", [
+            "from"       => $this->structure->getState($currentState),
+            "transition" => $transition
+        ]);
+
     }
 
     /**

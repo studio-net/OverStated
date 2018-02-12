@@ -87,10 +87,6 @@ class Transition implements MachineDriven
         if (isset($this->id)) {
             return $this->id;
         }
-
-        $className = str_replace('\\', '', snake_case(class_basename($this)));
-
-        return $this->id = str_replace('_state', '', $className);
     }
 
     /**
@@ -144,101 +140,19 @@ class Transition implements MachineDriven
     }
 
     /**
-     * Get the bound events on the transition.
-     *
-     * @return array
-     */
-    public function getBoundEvents()
-    {
-        return $this->boundEvents;
-    }
-
-    /**
-     * Helper function to handle a state method.
-     *
-     * @param string $handle
-     * @param array $args
-     *
-     * @return mixed
-     */
-    public function handle($handle, $args = [])
-    {
-        return $this->machine->handle($handle, $args);
-    }
-
-    /**
-     * @param $event
-     * @param array $args
-     */
-    public function fire($event, $args = [])
-    {
-        $this->machine->fire($event, $args);
-    }
-
-    /**
-     * @param $event
-     * @param $callback
-     */
-    public function listen($event, $callback)
-    {
-        $this->boundEvents[] = $event;
-
-        $this->machine->listen($event, $callback);
-    }
-
-    /**
-     * Forget bound events
-     *
-     * @param $events
-     */
-    public function forget($events)
-    {
-        $this->machine->forget($events);
-    }
-
-    /**
-     * @param string $method
-     * @param Closure $closure
-     */
-    public function addClosure($method, Closure $closure)
-    {
-        $this->closures[$method] = $closure;
-    }
-
-    /**
-     * onEnter handler for state.
-     *
-     * @param State $state
+     * Is transition undirected ?
+     * 
      * @return bool
      */
-    public function onEnter(State $state)
-    {
-        return true;
+    public function isUndirected() {
+        return $this->undirected;
     }
 
     /**
-     * onExit handler for state
-     *
-     * @param State $state
-     * @return bool
+     * Called during transition.
+     * 
+     * @throws Exception if transition is not possible.
      */
-    public function onExit(State $state)
-    {
-        return true;
-    }
+    public function onTransit() {}
 
-    /**
-     * @param $method
-     * @param $args
-     * @return mixed
-     */
-    public function __call($method, $args)
-    {
-        if (array_key_exists($method, $this->closures)) {
-            array_unshift($args, $this);
-            return call_user_func_array($this->closures[$method], $args);
-        }
-
-        return null;
-    }
 }
