@@ -11,12 +11,11 @@ interface StructureInterface
 {
 
     /**
-     * @param $id
      * @param State $state
      * @param int $location
      * @return
      */
-    public function addState($id, State $state, $location = 0);
+    public function addState(State $state, $location = 0);
 
     /**
      * @param string $state

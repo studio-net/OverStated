@@ -52,8 +52,10 @@ class GraphStructure implements StructureInterface, MachineDriven
      * @param State $state
      * @param int $location
      */
-    public function addState($id, State $state, $location = 0)
+    public function addState(State $state, $location = 0)
     {
+        $id = $state->getId();
+        
         if ($this->graph->getVertices()->isEmpty() || $location === 1) {
             $this->initial = $id;
         }

@@ -17,23 +17,9 @@ class StateFactory
      *
      * @throws StateException
      */
-    public function create($id, $resolvable = null)
+    public function create($resolvable = null)
     {
-        if (func_num_args() === 1) {
-            $resolvable = func_get_arg(0);
-            $id = null;
-        }
-
-        if (is_null($id) && is_callable($resolvable)) {
-            throw new StateException('States as closures must have an ID.');
-        }
-
         $state = $this->buildState($resolvable);
-
-        if ($id) {
-            $state->setId($id);
-        }
-
         return $state;
     }
 
@@ -43,16 +29,7 @@ class StateFactory
      */
     private function buildState($resolvable)
     {
-        if ($resolvable instanceof Closure) {
-            $state = $this->closureState($resolvable);
-        } elseif (is_array($resolvable)) {
-            $state = $this->closureFromArray($resolvable);
-        } elseif (is_null($resolvable)) {
-            $state = $this->newState();
-        } else {
-            $state = $this->newStateFromClass($resolvable);
-        }
-
+        $state = $this->newStateFromClass($resolvable);
         return $state;
     }
 
@@ -60,50 +37,10 @@ class StateFactory
      * @param $resolvable
      * @return State
      */
-    private function closureState($resolvable)
-    {
-        $state = $this->newState();
-
-        $state->addClosure('onEnter', $resolvable);
-
-        return $state;
-    }
-
-    /**
-     * @param $resolvable
-     * @return State
-     */
-    private function closureFromArray($resolvable)
-    {
-        $state = $this->newState();
-
-        foreach ($resolvable as $map) {
-            if (is_array($map)) {
-                foreach ($map as $id => $closure) {
-                    $state->addClosure($id, $closure);
-                }
-            }
-        }
-
-        return $state;
-    }
-
-    /**
-     * @param $resolvable
-     * @return State
-     */
-    private function newStateFromClass($resolvable)
+    private function newStateFromClass($resolvable) : State
     {
         $class = '\\' . ltrim($resolvable, '\\');
-
         return new $class();
     }
 
-    /**
-     * @return State
-     */
-    private function newState()
-    {
-        return new State();
-    }
 }

@@ -21,7 +21,7 @@ class State implements MachineDriven
     /**
      * @var string
      */
-    protected $state;
+    protected $id;
 
     /**
      * @var Vertex
@@ -90,24 +90,24 @@ class State implements MachineDriven
      */
     public function getId()
     {
-        if (isset($this->state)) {
-            return $this->state;
+        if (isset($this->id)) {
+            return $this->id;
         }
 
 
         $className = str_replace('\\', '', snake_case(class_basename($this)));
 
-        return $this->state = str_replace('_state', '', $className);
+        return $this->id = str_replace('_state', '', $className);
     }
 
     /**
      * Set the state ID
      *
-     * @param string $state
+     * @param string $id
      */
-    public function setId($state)
+    public function setId($id)
     {
-        $this->state = $state;
+        $this->id = $id;
     }
 
     /**
