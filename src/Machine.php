@@ -102,7 +102,7 @@ class Machine
         $transition->onTransit();
 
         array_push($this->history, $currentState);
-        $this->setState($destState);
+        $this->setState($this->structure->getState($destState));
 
         // Emit a transition event
         $this->fire("transition", [
