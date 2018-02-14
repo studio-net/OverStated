@@ -4,6 +4,8 @@ use UnderStated\Contracts\EventInterface;
 use UnderStated\Contracts\StructureInterface;
 use UnderStated\Exceptions\UninitialisedException;
 use UnderStated\States\State;
+use Illuminate\Database\Eloquent\Model;
+
 
 /**
  * Class Machine
@@ -112,6 +114,8 @@ class Machine
 
     }
 
+
+
     /**
      * Handle a method on the current state.
      *
@@ -164,11 +168,26 @@ class Machine
     /**
      * Get a list of all possible state transitions.
      *
+     * @param $options array
      * @return array
      */
-    public function getTransitions()
+    public function getTransitions($options = [])
     {
-        return $this->structure->getTransitionsFrom($this->getState()->getId());
+        $options = $options + [
+            "onlyValid"   => false,
+        ];
+
+        $transitions = $this->structure->getTransitionsFrom(
+            $this->getState()->getId());
+
+        $validTransitions = [];
+        foreach ($transitions as $transition) {
+            if ($transition->canTransit()) {
+                $validTransitions[] = $transition;
+            }
+        }
+
+        return $options["onlyValid"] ? $validTransitions : $transitions;
     }
 
     /**

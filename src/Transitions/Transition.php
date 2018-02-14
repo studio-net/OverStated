@@ -6,6 +6,7 @@ use Closure;
 use Fhaculty\Graph\Vertex;
 use UnderStated\Contracts\MachineDriven;
 use UnderStated\Machine;
+use UnderStated\Exceptions;
 
 /**
  * Class Transition
@@ -42,22 +43,17 @@ class Transition implements MachineDriven
     /**
      * @var bool
      */
+    public $valid = true;
+
+    /**
+     * @var bool
+     */
     protected $undirected = false;
 
     /**
      * @var Machine
      */
     protected $machine;
-
-    /**
-     * @var array
-     */
-    protected $closures = [];
-
-    /**
-     * @var array
-     */
-    protected $boundEvents = [];
 
     /**
      * @param Machine $machine
@@ -151,8 +147,22 @@ class Transition implements MachineDriven
     /**
      * Called during transition.
      * 
-     * @throws Exception if transition is not possible.
+     * @throws Exception on error during transit.
      */
-    public function onTransit() {}
+    public function onTransit() {
+        if (!$this->canTransit()) {
+            throw new Exceptions\TransitionException("Can't transit");
+        }
+    }
+
+    /**
+     * Called during transition.
+     * 
+     * @return bool
+     */
+    public function canTransit() {
+        $this->valid = true;
+        return $this->valid;
+    }
 
 }
