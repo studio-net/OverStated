@@ -9,6 +9,7 @@ use UnderStated\Machine;
 use UnderStated\States\StateFactory;
 use UnderStated\Transitions\TransitionFactory;
 use UnderStated\Transitions\Transition;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class GraphBuilder
@@ -101,8 +102,20 @@ class GraphBuilder implements MachineBuilder
     public function transition($transition)
     {
         $transition = $this->transitionFactory->create($transition);
-
+        $transition->setMachine($this->machine);
         $this->graph->addTransition($transition);
+        return $this;
+    }
+
+    /**
+     * Add associated model
+     *
+     * @param Model $model
+     * @return $this
+     */
+    public function model($model)
+    {
+        $this->machine->setModel($model);
         return $this;
     }
 

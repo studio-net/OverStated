@@ -32,6 +32,7 @@ trait Stateful {
 			foreach ($fsmInfos['transitions'] as $transition) {
 				$builder->transition($transition);
 			}
+			$builder->model($this);
 			$this->fsms[$field] = $builder->getMachine();
 
 			if (!empty($this->$field)) {

@@ -192,6 +192,25 @@ class Machine
     }
 
     /**
+     * Set associated model.
+     * @param Model $model
+     */
+    public function setModel(Model $model) 
+    {
+        $this->model = $model;
+    }
+
+    /**
+     * Get associated model.
+     * 
+     * @return Model
+     */
+    public function getModel() : Model
+    {
+        return $this->model;
+    }
+
+    /**
      * Get the machines structure instance.
      *
      * @return mixed
