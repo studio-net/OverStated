@@ -56,4 +56,18 @@ trait Stateful {
 		return $this->fsms[$field];
 	}
 
+	/**
+    * Transition from the current state to another via a valid
+	 * transition.
+	 * 
+	 * @throws \Exception if cant transition. 
+	 * @param string $field
+	 * @param string $transition
+	 */
+	public function fsmTransition($field, $transition) {
+		$this->getFsm($field)->transition($transition);
+		$this->$field = $this->getFsm($field)->getState()->getId();
+		$this->save();
+	}
+
 }
