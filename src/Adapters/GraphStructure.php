@@ -134,7 +134,7 @@ class GraphStructure implements StructureInterface, MachineDriven
     {
         $to = $this->getVertex($transition->getTo());
         
-        $this->transitions[$transition->getId()] = $transition;
+        $this->transitions[$transition->getSlug()] = $transition;
 
         foreach ($transition->getFrom() as $origin) {
             $from = $this->getVertex($origin);

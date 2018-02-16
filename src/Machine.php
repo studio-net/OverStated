@@ -94,7 +94,7 @@ class Machine
             throw new Exceptions\TransitionException(
                 sprintf(
                     "Transition '%s' to status '%s' is impossible from status '%s'",
-                    $transition->getId(),
+                    $transition->getSlug(),
                     $destState,
                     $this->getState()->getId()
                 )

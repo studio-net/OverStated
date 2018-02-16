@@ -18,7 +18,7 @@ class Transition implements MachineDriven
     /**
      * @var string
      */
-    public $id;
+    public $slug;
 
     /**
      * @var string
@@ -78,10 +78,10 @@ class Transition implements MachineDriven
      *
      * @return string
      */
-    public function getId()
+    public function getSlug()
     {
-        if (isset($this->id)) {
-            return $this->id;
+        if (isset($this->slug)) {
+            return $this->slug;
         }
     }
 
@@ -90,9 +90,9 @@ class Transition implements MachineDriven
      *
      * @param string $state
      */
-    public function setId($id)
+    public function setSlug($slug)
     {
-        $this->id = $id;
+        $this->slug = $slug;
     }
 
     /**
