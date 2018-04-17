@@ -97,7 +97,7 @@ class Transition implements MachineDriven
 
     /**
      * Get transition nicename.
-     * 
+     *
      * @return string
      */
     public function getNicename()
@@ -107,7 +107,7 @@ class Transition implements MachineDriven
 
     /**
      * Get transition description.
-     * 
+     *
      * @return string
      */
     public function getDescription()
@@ -117,7 +117,7 @@ class Transition implements MachineDriven
 
     /**
      * Get transition origins.
-     * 
+     *
      * @return []string
      */
     public function getFrom()
@@ -127,7 +127,7 @@ class Transition implements MachineDriven
 
     /**
      * Get transition destination.
-     * 
+     *
      * @return string
      */
     public function getTo()
@@ -137,7 +137,7 @@ class Transition implements MachineDriven
 
     /**
      * Is transition undirected ?
-     * 
+     *
      * @return bool
      */
     public function isUndirected() {
@@ -146,7 +146,7 @@ class Transition implements MachineDriven
 
     /**
      * Called during transition.
-     * 
+     *
      * @throws Exception on error during transit.
      */
     public function onTransit() {
@@ -157,7 +157,7 @@ class Transition implements MachineDriven
 
     /**
      * Called during transition.
-     * 
+     *
      * @return bool
      */
     public function canTransit() {

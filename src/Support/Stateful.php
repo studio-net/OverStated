@@ -44,7 +44,7 @@ trait Stateful {
 
 	/**
 	 * Get requested FSM.
-	 * 
+	 *
 	 * @param string $field
 	 * @return UnderStated\Machine
 	 */
@@ -59,8 +59,8 @@ trait Stateful {
 	/**
     * Transit from the current state to another via a valid
 	 * transition.
-	 * 
-	 * @throws \Exception if cant transit. 
+	 *
+	 * @throws \Exception if cant transit.
 	 * @param string $field
 	 * @param string $transition
 	 */
