@@ -18,7 +18,7 @@ Add the following to your composer.json file
 ````json
 {
     "require": {
-        "studionet/overstated": "0.0.5"
+        "studionet/overstated": "0.1.0"
     }
 }
 ````
