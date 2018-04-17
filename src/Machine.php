@@ -1,9 +1,9 @@
-<?php namespace UnderStated;
+<?php namespace OverStated;
 
-use UnderStated\Contracts\EventInterface;
-use UnderStated\Contracts\StructureInterface;
-use UnderStated\Exceptions\UninitialisedException;
-use UnderStated\States\State;
+use OverStated\Contracts\EventInterface;
+use OverStated\Contracts\StructureInterface;
+use OverStated\Exceptions\UninitialisedException;
+use OverStated\States\State;
 use Illuminate\Database\Eloquent\Model;
 
 
@@ -214,14 +214,14 @@ class Machine
      * Set associated model.
      * @param Model $model
      */
-    public function setModel(Model $model) 
+    public function setModel(Model $model)
     {
         $this->model = $model;
     }
 
     /**
      * Get associated model.
-     * 
+     *
      * @return Model
      */
     public function getModel() : Model

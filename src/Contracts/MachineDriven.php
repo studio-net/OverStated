@@ -1,8 +1,8 @@
 <?php
 
-namespace UnderStated\Contracts;
+namespace OverStated\Contracts;
 
-use UnderStated\Machine;
+use OverStated\Machine;
 
 /**
  * Interface MachineDriven

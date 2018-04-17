@@ -1,16 +1,16 @@
 <?php
 
-namespace UnderStated\Providers;
+namespace OverStated\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use UnderStated\Adapters\LaravelEvents;
-use UnderStated\Contracts\EventInterface;
+use OverStated\Adapters\LaravelEvents;
+use OverStated\Contracts\EventInterface;
 
 /**
- * Class UnderStatedServiceProvider
- * @package UnderStated\Providers
+ * Class OverStatedServiceProvider
+ * @package OverStated\Providers
  */
-class UnderStatedServiceProvider extends ServiceProvider
+class OverStatedServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.

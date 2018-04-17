@@ -1,7 +1,7 @@
 <?php
-namespace UnderStated\Support;
+namespace OverStated\Support;
 
-use UnderStated\Builders\GraphBuilder;
+use OverStated\Builders\GraphBuilder;
 
 /**
  * Stateful
@@ -46,9 +46,9 @@ trait Stateful {
 	 * Get requested FSM.
 	 *
 	 * @param string $field
-	 * @return UnderStated\Machine
+	 * @return OverStated\Machine
 	 */
-	public function getFsm($field) : \UnderStated\Machine {
+	public function getFsm($field) : \OverStated\Machine {
 
 		if (empty($this->fsms)) {
 			$this->registerFsms();

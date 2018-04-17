@@ -1,19 +1,19 @@
 <?php
 
-namespace UnderStated\Builders;
+namespace OverStated\Builders;
 
 use Fhaculty\Graph\Graph;
-use UnderStated\Adapters\GraphStructure;
-use UnderStated\Contracts\MachineBuilder;
-use UnderStated\Machine;
-use UnderStated\States\StateFactory;
-use UnderStated\Transitions\TransitionFactory;
-use UnderStated\Transitions\Transition;
+use OverStated\Adapters\GraphStructure;
+use OverStated\Contracts\MachineBuilder;
+use OverStated\Machine;
+use OverStated\States\StateFactory;
+use OverStated\Transitions\TransitionFactory;
+use OverStated\Transitions\Transition;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class GraphBuilder
- * @package UnderStated\Builders
+ * @package OverStated\Builders
  */
 class GraphBuilder implements MachineBuilder
 {

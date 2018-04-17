@@ -1,6 +1,6 @@
-<?php namespace UnderStated\Contracts;
+<?php namespace OverStated\Contracts;
 
-use UnderStated\Machine;
+use OverStated\Machine;
 
 /**
  * Interface MachineBuilder

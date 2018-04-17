@@ -1,10 +1,10 @@
 <?php
 
-namespace UnderStated\Exceptions;
+namespace OverStated\Exceptions;
 
 /**
  * Class UninitialisedException
- * @package UnderStated\Exceptions
+ * @package OverStated\Exceptions
  */
 class UninitialisedException extends \Exception
 {

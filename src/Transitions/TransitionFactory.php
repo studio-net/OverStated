@@ -1,7 +1,7 @@
-<?php namespace UnderStated\Transitions;
+<?php namespace OverStated\Transitions;
 
 use Closure;
-use UnderStated\Exceptions\TransitionException;
+use OverStated\Exceptions\TransitionException;
 
 /**
  * Class TransitionFactory

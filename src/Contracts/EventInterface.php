@@ -1,10 +1,10 @@
 <?php
 
-namespace UnderStated\Contracts;
+namespace OverStated\Contracts;
 
 /**
  * Interface EventInterface
- * @package UnderStated\Contracts
+ * @package OverStated\Contracts
  */
 interface EventInterface
 {

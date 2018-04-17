@@ -1,18 +1,18 @@
 <?php
 
-namespace UnderStated\Adapters;
+namespace OverStated\Adapters;
 
 use Fhaculty\Graph\Graph;
-use UnderStated\Contracts\MachineDriven;
-use UnderStated\Contracts\StructureInterface;
-use UnderStated\Machine;
-use UnderStated\States\State;
-use UnderStated\Transitions\Transition;
-use UnderStated\Exceptions\TransitionException;
+use OverStated\Contracts\MachineDriven;
+use OverStated\Contracts\StructureInterface;
+use OverStated\Machine;
+use OverStated\States\State;
+use OverStated\Transitions\Transition;
+use OverStated\Exceptions\TransitionException;
 
 /**
  * Class GraphStructure
- * @package UnderStated\Adapters
+ * @package OverStated\Adapters
  */
 class GraphStructure implements StructureInterface, MachineDriven
 {
@@ -55,7 +55,7 @@ class GraphStructure implements StructureInterface, MachineDriven
     public function addState(State $state, $location = 0)
     {
         $id = $state->getId();
-        
+
         if ($this->graph->getVertices()->isEmpty() || $location === 1) {
             $this->initial = $id;
         }
@@ -133,7 +133,7 @@ class GraphStructure implements StructureInterface, MachineDriven
     public function addTransition($transition) : \Fhaculty\Graph\Set\Edges
     {
         $to = $this->getVertex($transition->getTo());
-        
+
         $this->transitions[$transition->getSlug()] = $transition;
 
         foreach ($transition->getFrom() as $origin) {

@@ -1,11 +1,11 @@
-<?php namespace UnderStated\Contracts;
+<?php namespace OverStated\Contracts;
 
-use UnderStated\States\State;
-use UnderStated\Transitions\Transition;
+use OverStated\States\State;
+use OverStated\Transitions\Transition;
 
 /**
  * Interface StructureInterface
- * @package UnderStated\Contracts
+ * @package OverStated\Contracts
  */
 interface StructureInterface
 {

@@ -1,5 +1,5 @@
 {
-  "name": "studio-net/understated",
+  "name": "studio-net/overstated",
   "description": "A PHP Finite State Machine for Laravel 5+",
   "keywords": ["laravel", "fsm", "states"],
   "minimum-stability": "stable",
@@ -12,12 +12,12 @@
   ],
   "autoload" : {
     "psr-4" : {
-      "UnderStated\\" : "src/"
+      "OverStated\\" : "src/"
     }
   },
   "autoload-dev" : {
     "psr-4" : {
-      "UnderStated\\Examples\\" : "examples/"
+      "OverStated\\Examples\\" : "examples/"
     }
   },
   "require": {

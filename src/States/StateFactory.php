@@ -1,7 +1,7 @@
-<?php namespace UnderStated\States;
+<?php namespace OverStated\States;
 
 use Closure;
-use UnderStated\Exceptions\StateException;
+use OverStated\Exceptions\StateException;
 
 /**
  * Class StateFactory

@@ -1,15 +1,15 @@
 <?php
 
-namespace UnderStated\States;
+namespace OverStated\States;
 
 use Closure;
 use Fhaculty\Graph\Vertex;
-use UnderStated\Contracts\MachineDriven;
-use UnderStated\Machine;
+use OverStated\Contracts\MachineDriven;
+use OverStated\Machine;
 
 /**
  * Class State
- * @package UnderStated\States
+ * @package OverStated\States
  */
 class State implements MachineDriven
 {

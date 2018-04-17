@@ -1,16 +1,16 @@
 <?php
 
-namespace UnderStated\Transitions;
+namespace OverStated\Transitions;
 
 use Closure;
 use Fhaculty\Graph\Vertex;
-use UnderStated\Contracts\MachineDriven;
-use UnderStated\Machine;
-use UnderStated\Exceptions;
+use OverStated\Contracts\MachineDriven;
+use OverStated\Machine;
+use OverStated\Exceptions;
 
 /**
  * Class Transition
- * @package UnderStated\Transitions
+ * @package OverStated\Transitions
  */
 class Transition implements MachineDriven
 {

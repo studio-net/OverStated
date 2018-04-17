@@ -1,11 +1,11 @@
-<?php namespace UnderStated\Adapters;
+<?php namespace OverStated\Adapters;
 
-use UnderStated\Contracts\EventInterface;
+use OverStated\Contracts\EventInterface;
 use Illuminate\Contracts\Events\Dispatcher;
 
 /**
  * Class LaravelEvents
- * @package UnderStated\Adapters
+ * @package OverStated\Adapters
  */
 class LaravelEvents implements EventInterface
 {

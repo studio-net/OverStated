@@ -1,8 +1,7 @@
 A PHP Finite State Machine (With Laravel 5.4 integration)
 ==========================
-[![Build Status](https://travis-ci.org/Daveawb/UnderStated.svg?branch=master)](https://travis-ci.org/Daveawb/UnderStated)
 
-Originaly based on http://github.com/daveawb/understated
+Originaly based on https://github.com/daveawb/overstated
 
 ## Why use an FSM?
 FSM's are a resource that allow developers tight control over resources within an application. There are many
@@ -19,7 +18,7 @@ Add the following to your composer.json file
 ````json
 {
     "require": {
-        "studionet/understated": "0.0.5"
+        "studionet/overstated": "0.0.5"
     }
 }
 ````
@@ -30,7 +29,7 @@ Open `config/app.php` and register the required service provider.
 ```php
 'providers' => [
     // ...
-    UnderStated\Providers\UnderStatedServiceProvider::class,
+    OverStated\Providers\OverStatedServiceProvider::class,
 ]
 ```
 
@@ -39,7 +38,7 @@ Open `config/app.php` and register the required service provider.
 First you have to define states as classes, for example :
 
 ````php
-use UnderStated\States\State;
+use OverStated\States\State;
 
 /**
  * Class Deleted
@@ -53,7 +52,7 @@ class Deleted extends State {
 And transitions :
 
 ````php
-use UnderStated\Transitions\Transition;
+use OverStated\Transitions\Transition;
 
 /**
  * Class Delete
@@ -75,7 +74,7 @@ class Delete extends Transition {
 The simple way to use it is in a Model, with the Stateful trait
 
 ````php
-use UnderStated\Support\Stateful;
+use OverStated\Support\Stateful;
 use App\Fsm\Property\States;
 use App\Fsm\Property\Transitions;
 
@@ -116,7 +115,7 @@ $post->fsmTransit("status", "delete");
 // Will echo "deleted"
 echo $post->status;
 
-// Will throw an UnderStated\Exceptions\TransitionException
+// Will throw an OverStated\Exceptions\TransitionException
 $post->fsmTransit("status", "delete");
 ````
 
@@ -124,7 +123,7 @@ $post->fsmTransit("status", "delete");
 Or, you can manually create FSM
 
 ````php
-use UnderStated\Builders\GraphBuilder;
+use OverStated\Builders\GraphBuilder;
 use App\Fsm\Property\States;
 use App\Fsm\Property\Transitions;
 
@@ -158,7 +157,7 @@ $fsm->transition("delete");
 // Will output "deleted"
 $fsm->getState()->getId();
 
-// Will throw an UnderStated\Exceptions\TransitionException
+// Will throw an OverStated\Exceptions\TransitionException
 $fsm->transition("delete");
 ````
 
@@ -166,7 +165,7 @@ $fsm->transition("delete");
 You can add a hook on a transition by overriding canTransit() fonction
 
 ````php
-use UnderStated\Transitions\Transition;
+use OverStated\Transitions\Transition;
 
 /**
  * Class Validate
