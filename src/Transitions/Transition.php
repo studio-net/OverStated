@@ -7,6 +7,7 @@ use Fhaculty\Graph\Vertex;
 use OverStated\Contracts\MachineDriven;
 use OverStated\Machine;
 use OverStated\Exceptions;
+use Illuminate\Support\Collection;
 
 /**
  * Class Transition
@@ -54,6 +55,18 @@ class Transition implements MachineDriven
      * @var Machine
      */
     protected $machine;
+
+    /**
+    * @var Collection
+    */
+    private $errors;
+
+    /**
+     * Constructor
+     */
+    public function __construct() {
+        $this->errors = collect([]);
+    }
 
     /**
      * @param Machine $machine
@@ -145,13 +158,33 @@ class Transition implements MachineDriven
     }
 
     /**
+     * Adds error message.
+     *
+     * @param $message string
+     */
+    public function addError(string $message) {
+        $this->errors->push($message);
+    }
+
+    /**
+     * Get errors and reset errors collection.
+     */
+    public function getAndFlushErrors():Collection {
+        $errors = $this->errors;
+        $this->errors = collect([]);
+        return $errors;
+    }
+
+    /**
      * Called during transition.
      *
      * @throws Exception on error during transit.
      */
     public function onTransit() {
         if (!$this->canTransit()) {
-            throw new Exceptions\TransitionException("Can't transit");
+            $errors = $this->getAndFlushErrors();
+            $message = $errors->count() ? $errors->last() : "Can't transit";
+            throw new Exceptions\TransitionException($message);
         }
     }
 
