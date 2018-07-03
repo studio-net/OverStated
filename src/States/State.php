@@ -100,4 +100,12 @@ class State implements MachineDriven
         $this->id = $id;
     }
 
+    /**
+     * Returns validation constraints
+     *
+     * @return array
+     */
+    public function getValidationRules() {
+        return [];
+    }
 }

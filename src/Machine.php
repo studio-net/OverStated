@@ -322,4 +322,39 @@ class Machine
    {
       return "{$this->getId()}.{$string}";
    }
+
+   /**
+    * Validates model against state validation rules
+    *
+    * @return bool
+    * @throws \Illuminate\Validation\ValidationException
+    */
+   public function validates()
+   {
+      $validator = \Illuminate\Support\Facades\Validator::make(
+         $this->getModel()->toArray(),
+         $this->getState()->getValidationRules()
+      );
+
+      if ($validator->fails()) {
+         throw new \Illuminate\Validation\ValidationException($validator);
+      }
+   }
+
+   /**
+    * Check if the model is valid (easy way to check if the state's constraints
+    * are valids)
+    *
+    * @return bool
+    */
+   public function isModelValid()
+   {
+      try {
+         $this->validates();
+      } catch (\Illuminate\Validation\ValidationException $exception) {
+         return false;
+      }
+
+      return true;
+   }
 }
