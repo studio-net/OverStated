@@ -79,6 +79,7 @@ use App\Fsm\Property\States;
 use App\Fsm\Property\Transitions;
 
 class Post extends Model {
+	use Stateful;
 
 	/** @type array $attributes default values */
 	protected $attributes = [
