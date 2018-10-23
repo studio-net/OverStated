@@ -62,6 +62,11 @@ class Transition implements MachineDriven
     private $errors;
 
     /**
+     * @var array
+     */
+    private $arguments = [];
+
+    /**
      * Constructor
      */
     public function __construct() {
@@ -196,6 +201,20 @@ class Transition implements MachineDriven
     public function canTransit() {
         $this->valid = true;
         return $this->valid;
+    }
+
+    /**
+     * Set Arguments
+     */
+    public function setArguments(array $arguments) : void {
+       $this->arguments = $arguments;
+    }
+
+    /**
+     * Get Arguments
+     */
+    public function getArguments() : array {
+       return $this->arguments;
     }
 
 }

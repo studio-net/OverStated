@@ -74,12 +74,14 @@ class Machine
     * transition.
     *
     * @param string $transition
+    * @param array $arguments
     * @return bool
     * @throws UninitialisedException
     */
-   public function transition($transition)
+   public function transition($transition, array $arguments = [])
    {
       $transition = $this->structure->getTransition($transition);
+		$transition->setArguments($arguments);
       $destState = $transition->getTo();
 
       if (! $this->state) {
