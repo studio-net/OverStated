@@ -1,4 +1,6 @@
-<?php namespace OverStated\States;
+<?php
+
+namespace OverStated\States;
 
 use Closure;
 use OverStated\Exceptions\StateException;
@@ -7,40 +9,37 @@ use OverStated\Exceptions\StateException;
  * Class StateFactory
  * @package FSM\States
  */
-class StateFactory
-{
-    /**
-     * @param $id
-     * @param $resolvable
-     *
-     * @return State
-     *
-     * @throws StateException
-     */
-    public function create($resolvable = null)
-    {
-        $state = $this->buildState($resolvable);
-        return $state;
-    }
+class StateFactory {
 
-    /**
-     * @param $resolvable
-     * @return State
-     */
-    private function buildState($resolvable)
-    {
-        $state = $this->newStateFromClass($resolvable);
-        return $state;
-    }
+	/**
+	 * @param $id
+	 * @param $resolvable
+	 *
+	 * @return State
+	 *
+	 * @throws StateException
+	 */
+	public function create($resolvable = null) {
+		$state = $this->buildState($resolvable);
+		return $state;
+	}
 
-    /**
-     * @param $resolvable
-     * @return State
-     */
-    private function newStateFromClass($resolvable) : State
-    {
-        $class = '\\' . ltrim($resolvable, '\\');
-        return new $class();
-    }
+	/**
+	 * @param $resolvable
+	 * @return State
+	 */
+	private function buildState($resolvable) {
+		$state = $this->newStateFromClass($resolvable);
+		return $state;
+	}
+
+	/**
+	 * @param $resolvable
+	 * @return State
+	 */
+	private function newStateFromClass($resolvable) : State {
+		$class = '\\' . ltrim($resolvable, '\\');
+		return new $class();
+	}
 
 }

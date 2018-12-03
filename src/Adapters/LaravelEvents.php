@@ -7,47 +7,44 @@ use Illuminate\Contracts\Events\Dispatcher;
  * Class LaravelEvents
  * @package OverStated\Adapters
  */
-class LaravelEvents implements EventInterface
-{
-    /**
-     * @var Dispatcher
-     */
-    protected $dispatcher;
+class LaravelEvents implements EventInterface {
 
-    /**
-     * @param Dispatcher $dispatcher
-     */
-    public function __construct(Dispatcher $dispatcher)
-    {
-        $this->dispatcher = $dispatcher;
-    }
+	/**
+	 * @var Dispatcher
+	 */
+	protected $dispatcher;
 
-    /**
-     * @param $name
-     * @param callable $callback
-     * @return void
-     */
-    public function listen($name, callable $callback)
-    {
-        $this->dispatcher->listen($name, $callback);
-    }
+	/**
+	 * @param Dispatcher $dispatcher
+	 */
+	public function __construct(Dispatcher $dispatcher) {
+		$this->dispatcher = $dispatcher;
+	}
 
-    /**
-     * @param $name
-     * @param array $args
-     * @return void
-     */
-    public function fire($name, $args = [])
-    {
-        $this->dispatcher->dispatch($name, $args);
-    }
+	/**
+	 * @param $name
+	 * @param callable $callback
+	 * @return void
+	 */
+	public function listen($name, callable $callback) {
+		$this->dispatcher->listen($name, $callback);
+	}
 
-    /**
-     * @param $names
-     * @return void
-     */
-    public function forget($names)
-    {
-        $this->dispatcher->forget($names);
-    }
+	/**
+	 * @param $name
+	 * @param array $args
+	 * @return void
+	 */
+	public function fire($name, $args = []) {
+		$this->dispatcher->dispatch($name, $args);
+	}
+
+	/**
+	 * @param $names
+	 * @return void
+	 */
+	public function forget($names) {
+		$this->dispatcher->forget($names);
+	}
+
 }

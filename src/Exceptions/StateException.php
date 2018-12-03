@@ -6,7 +6,6 @@ namespace OverStated\Exceptions;
  * Class StateException
  * @package OverStated\Exceptions
  */
-class StateException extends \Exception
-{
+class StateException extends \Exception {
 
 }

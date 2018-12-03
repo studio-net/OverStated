@@ -6,24 +6,25 @@ namespace OverStated\Contracts;
  * Interface EventInterface
  * @package OverStated\Contracts
  */
-interface EventInterface
-{
-    /**
-     * @param $name
-     * @param callable $callback
-     * @return mixed
-     */
-    public function listen($name, callable $callback);
+interface EventInterface {
 
-    /**
-     * @param $name
-     * @param array $args
-     * @return mixed
-     */
-    public function fire($name, $args = []);
+	/**
+	 * @param $name
+	 * @param callable $callback
+	 * @return mixed
+	 */
+	public function listen($name, callable $callback);
 
-    /**
-     * @param $names
-     */
-    public function forget($names);
+	/**
+	 * @param $name
+	 * @param array $args
+	 * @return mixed
+	 */
+	public function fire($name, $args = []);
+
+	/**
+	 * @param $names
+	 */
+	public function forget($names);
+
 }

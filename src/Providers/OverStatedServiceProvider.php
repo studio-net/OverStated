@@ -10,28 +10,26 @@ use OverStated\Contracts\EventInterface;
  * Class OverStatedServiceProvider
  * @package OverStated\Providers
  */
-class OverStatedServiceProvider extends ServiceProvider
-{
-    /**
-     * Bootstrap the application services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        //
-    }
+class OverStatedServiceProvider extends ServiceProvider {
 
-    /**
-     * Register the application services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        $this->app->bind(
-            EventInterface::class,
-            LaravelEvents::class
-        );
-    }
+	/**
+	 * Bootstrap the application services.
+	 *
+	 * @return void
+	 */
+	public function boot() {
+	}
+
+	/**
+	 * Register the application services.
+	 *
+	 * @return void
+	 */
+	public function register() {
+		$this->app->bind(
+			EventInterface::class,
+			LaravelEvents::class
+		);
+	}
+
 }
