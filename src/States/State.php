@@ -102,10 +102,16 @@ class State implements MachineDriven
 
     /**
      * Returns validation constraints
-     *
-     * @return array
      */
-    public function getValidationRules() {
+    public function getValidationRules() : array {
         return [];
     }
+
+    /**
+     * Returns validation messages
+     */
+    public function getValidationMessages() : array {
+        return [];
+    }
+
 }

@@ -172,6 +172,13 @@ class Transition implements MachineDriven
     }
 
     /**
+     * Get errors
+     */
+    public function getErrors():Collection {
+        return $this->errors;
+    }
+
+    /**
      * Get errors and reset errors collection.
      */
     public function getAndFlushErrors():Collection {
@@ -186,7 +193,7 @@ class Transition implements MachineDriven
      * @throws Exception on error during transit.
      */
     public function onTransit() {
-        if (!$this->canTransit()) {
+        if (!$this->checkCanTransit()) {
             $errors = $this->getAndFlushErrors();
             $message = $errors->count() ? $errors->last() : "Can't transit";
             throw new Exceptions\TransitionException($message);
@@ -194,13 +201,38 @@ class Transition implements MachineDriven
     }
 
     /**
-     * Called during transition.
-     *
-     * @return bool
+     * Called during transition
      */
-    public function canTransit() {
-        $this->valid = true;
-        return $this->valid;
+    public final function checkCanTransit() : bool {
+
+       $this->valid = true;
+
+       // Call (possibly overloaded) "validatesTransition"
+       $this->validatesTransition();
+
+       try {
+          $this->machine->validates($this->to);
+       } catch (\Illuminate\Validation\ValidationException $exception) {
+          foreach ($exception->validator->messages()->all() as $message) {
+             $this->addError($message);
+          }
+       }
+
+       if ($this->errors->isNotEmpty()) {
+          $this->valid = false;
+       }
+
+       return $this->valid;
+    }
+
+    /**
+     * Called during transition.
+     * Meant to be overloaded.
+     *
+     * If you add some errors with $this->addError, the transition won't be
+     * possible.
+     */
+    public function validatesTransition() : void {
     }
 
     /**

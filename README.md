@@ -162,8 +162,8 @@ $fsm->getState()->getId();
 $fsm->transition("delete");
 ````
 
-## Hook
-You can add a hook on a transition by overriding canTransit() fonction
+## Validation
+You can add a hook on a transition by overriding validatesTransition().
 
 ````php
 use OverStated\Transitions\Transition;
@@ -181,10 +181,12 @@ class Validate extends Transition {
 	/**
 	 * @override
 	 */
-	public function canTransit() {
+	public function validatesTransition() {
 		// Model is available if you use Stateful trait on a Model
 		$post = $this->machine->getModel();
-		return empty($post->content);
+		if (empty($post->content)) {
+			$this->addError('Content must be set')
+		}
 	}
 
 }

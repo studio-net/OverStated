@@ -180,7 +180,7 @@ class Machine
 
       $validTransitions = [];
       foreach ($transitions as $transition) {
-            if ($transition->canTransit()) {
+            if ($transition->checkCanTransit()) {
                $validTransitions[] = $transition;
             }
       }
@@ -331,11 +331,18 @@ class Machine
     * @return bool
     * @throws \Illuminate\Validation\ValidationException
     */
-   public function validates()
+   public function validates($stateKey = null)
    {
+
+      if ($stateKey === null) {
+         $state = $this->getState();
+      } else {
+         $state = $this->structure->getInitialState($stateKey);
+      }
       $validator = \Illuminate\Support\Facades\Validator::make(
          $this->getModel()->toArray(),
-         $this->getState()->getValidationRules()
+         $state->getValidationRules(),
+         $state->getValidationMessages()
       );
 
       if ($validator->fails()) {
@@ -349,10 +356,10 @@ class Machine
     *
     * @return bool
     */
-   public function isModelValid()
+   public function isModelValid($stateKey = null)
    {
       try {
-         $this->validates();
+         $this->validates($stateKey);
       } catch (\Illuminate\Validation\ValidationException $exception) {
          return false;
       }
