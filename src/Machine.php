@@ -309,9 +309,9 @@ class Machine {
 	}
 
 	/**
-	 * Validates model against state validation rules
+	 * Validates model for a given (or current) state.
 	 *
-	 * @return bool
+	 * @param string|null $stateKey state to validate, or current state if null
 	 * @throws \Illuminate\Validation\ValidationException
 	 */
 	public function validates($stateKey = null) {
@@ -321,31 +321,9 @@ class Machine {
 		} else {
 			$state = $this->structure->getInitialState($stateKey);
 		}
-		$validator = \Illuminate\Support\Facades\Validator::make(
-			$this->getModel()->toArray(),
-			$state->getValidationRules(),
-			$state->getValidationMessages()
-		);
 
-		if ($validator->fails()) {
-			throw new \Illuminate\Validation\ValidationException($validator);
-		}
-	}
+		$state->validateState();
 
-	/**
-	 * Check if the model is valid (easy way to check if the state's constraints
-	 * are valids)
-	 *
-	 * @return bool
-	 */
-	public function isModelValid($stateKey = null) {
-		try {
-			$this->validates($stateKey);
-		} catch (\Illuminate\Validation\ValidationException $exception) {
-			return false;
-		}
-
-		return true;
 	}
 
 }

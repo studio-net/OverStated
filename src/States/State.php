@@ -11,7 +11,7 @@ use OverStated\Machine;
  * Class State
  * @package OverStated\States
  */
-class State implements MachineDriven {
+abstract class State implements MachineDriven {
 
 	/**
 	 * Initial state constant
@@ -38,14 +38,14 @@ class State implements MachineDriven {
 	 *
 	 * @return void
 	 */
-	public function setMachine(Machine $machine) {
+	final public function setMachine(Machine $machine) {
 		$this->machine = $machine;
 	}
 
 	/**
 	 * @return Machine
 	 */
-	public function getMachine() {
+	final public function getMachine() {
 		return $this->machine;
 	}
 
@@ -56,7 +56,7 @@ class State implements MachineDriven {
 	 *
 	 * @return void
 	 */
-	public function setVertex(Vertex $vertex) {
+	final public function setVertex(Vertex $vertex) {
 		$this->vertex = $vertex;
 	}
 
@@ -65,7 +65,7 @@ class State implements MachineDriven {
 	 *
 	 * @return Vertex
 	 */
-	public function getVertex() {
+	final public function getVertex() {
 		return $this->vertex;
 	}
 
@@ -74,11 +74,10 @@ class State implements MachineDriven {
 	 *
 	 * @return string
 	 */
-	public function getId() {
+	final public function getId() {
 		if (isset($this->id)) {
 			return $this->id;
 		}
-
 
 		$className = str_replace('\\', '', snake_case(class_basename($this)));
 
@@ -90,22 +89,18 @@ class State implements MachineDriven {
 	 *
 	 * @param string $id
 	 */
-	public function setId($id) {
+	final public function setId($id) {
 		$this->id = $id;
 	}
 
 	/**
-	 * Returns validation constraints
+	 * Validate the State.
+	 *
+	 * Meant to be overriden.
+	 *
+	 * @throws \Exception
 	 */
-	public function getValidationRules() : array {
-		return [];
-	}
-
-	/**
-	 * Returns validation messages
-	 */
-	public function getValidationMessages() : array {
-		return [];
+	public function validateState() {
 	}
 
 }
